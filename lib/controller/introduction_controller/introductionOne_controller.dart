@@ -4,9 +4,50 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:jobs_way/constants/constants.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jobs_way/view/introduction_screen.dart';
 import 'package:jobs_way/view/login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class IntroductionOne extends GetxController {
+class IntroductionOneController extends GetxController {
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    // conditionFunction(firstuser!);
+  }
+
+  var isFirstUser = "true";
+  bool? firstuser = true;
+  trueFunction() async {
+    final sharedPreference = await SharedPreferences.getInstance();
+    sharedPreference.setBool(isFirstUser, true);
+  }
+
+  falseFunction() async {
+    final sharedPreference = await SharedPreferences.getInstance();
+    sharedPreference.setBool(isFirstUser, false);
+  }
+
+  conditionFunction(bool value) async {
+    WidgetsFlutterBinding.ensureInitialized();
+    final sharedPreference = await SharedPreferences.getInstance();
+    sharedPreference.setBool(isFirstUser, value);
+    firstuser = sharedPreference.getBool(isFirstUser);
+    update();
+  }
+
+  introductionNavigaion() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    final sharedPreference = await SharedPreferences.getInstance();
+    firstuser = sharedPreference.getBool(isFirstUser);
+    if (firstuser == true) {
+      Get.to(() => const Introductionone());
+    } else {
+      Get.to(() => const LoginPage());
+    }
+    update();
+  }
+
   PageViewModel pageOne() {
     return PageViewModel(
       titleWidget: Column(
@@ -126,9 +167,13 @@ class IntroductionOne extends GetxController {
         children: [
           Image.asset("assets/intro2.png"),
           GestureDetector(
-            onTap: () => Get.to(
-              const LoginPage(),
-            ),
+            onTap: () {
+              falseFunction();
+              update();
+              Get.to(
+                const LoginPage(),
+              );
+            },
             child: Container(
               decoration: BoxDecoration(
                 color: primaryGreen,

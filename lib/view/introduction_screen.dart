@@ -13,7 +13,7 @@ class Introductionone extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var controller = Get.put(IntroductionOne());
+    var controller = Get.put(IntroductionOneController());
 
     List<PageViewModel> pages = [controller.pageOne(), controller.pageTwo()];
     return SafeArea(

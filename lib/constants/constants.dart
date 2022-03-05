@@ -33,16 +33,26 @@ textStyle(var color, var size, var weight,
 }
 
 formField(
-  var hint, {
+  var hint,
+  var obsecure,
+  var keyboardtype, {
   var suffix,
   var width,
   var height,
   padding,
+  var controller,
+  var validator,
 }) {
   return SizedBox(
     width: width,
     height: height,
     child: TextFormField(
+      keyboardType: keyboardtype,
+      textInputAction: TextInputAction.next,
+      obscureText: obsecure,
+      validator: validator,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      controller: controller,
       decoration: InputDecoration(
         suffixIcon: Padding(
           padding: EdgeInsets.only(top: 15.h),
@@ -64,7 +74,7 @@ formField(
           HexColor(
             "0B0A0A",
           ),
-          15.sp,
+          11.sp,
           FontWeight.normal,
         ),
       ),
@@ -139,6 +149,203 @@ findJobssearchformField(var hint, var icon, [var width]) {
         textBlack,
         11.sp,
         FontWeight.normal,
+      ),
+    ),
+  );
+}
+
+jobCards({
+  required var logo,
+  required var companyName,
+  required var location,
+  required var createdDat,
+  required var jobTitle,
+  required var salary,
+  required var timeschedule,
+  required var jobID,
+}) {
+  return Container(
+    height: 220.h,
+    width: 400.w,
+    decoration: BoxDecoration(
+      color: fullBlack,
+      borderRadius: BorderRadius.circular(
+        10.r,
+      ),
+    ),
+    child: Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(
+              vertical: 19.h,
+            ),
+            child: Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(
+                    10.r,
+                  ),
+                  child: SizedBox(
+                    height: 50.h,
+                    width: 55.w,
+                    child: Image.network(
+                      logo,
+                    ),
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: 13.w,
+                      ),
+                      child: Row(
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                width: 200.w,
+                                child: Text(
+                                  companyName,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                  style: textStyle(
+                                    pureWhite,
+                                    25.sp,
+                                    FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              Wrap(
+                                children: [
+                                  FaIcon(
+                                    FontAwesomeIcons.mapMarkerAlt,
+                                    size: 11,
+                                    color: quatesText,
+                                  ),
+                                  SizedBox(
+                                    width: 8.h,
+                                  ),
+                                  Text(
+                                    location,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                    style: textStyle(
+                                      quatesText,
+                                      11.sp,
+                                      FontWeight.normal,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                          Text(
+                            createdDat.toString(),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            style: textStyle(
+                              quatesText,
+                              11.sp,
+                              FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Row(
+            children: [
+              SizedBox(
+                width: 350.w,
+                child: Text(
+                  jobTitle,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                  style: textStyle(
+                    pureWhite,
+                    25.sp,
+                    FontWeight.bold,
+                  ),
+                ),
+              )
+            ],
+          ),
+          SizedBox(
+            height: 12.h,
+          ),
+          Row(
+            children: [
+              SizedBox(
+                width: 190.w,
+                child: Text(
+                  salary,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                  style: textStyle(
+                    HexColor(
+                      "#00B512",
+                    ),
+                    20.sp,
+                    FontWeight.w700,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  timeschedule.toString(),
+                  style: textStyle(
+                    pureWhite,
+                    14.sp,
+                    FontWeight.w400,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    Get.to(() => JobDetails(
+                          jobId: jobID,
+                          companyLocation: location,
+                          companyLogo: logo,
+                          companyName: companyName,
+                        ));
+                  },
+                  child: Container(
+                    child: Center(
+                      child: Text(
+                        "Know More",
+                        style: textStyle(
+                          primaryGreen,
+                          12.sp,
+                          FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    height: 28.h,
+                    width: 102.w,
+                    decoration: BoxDecoration(
+                      color: pureWhite,
+                      borderRadius: BorderRadius.circular(
+                        7.r,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          )
+        ],
       ),
     ),
   );
@@ -295,7 +502,7 @@ jobCard() {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    Get.to(() => const JobDetails());
+                    // Get.to(() =>  JobDetails());
                   },
                   child: Container(
                     child: Center(
@@ -327,9 +534,15 @@ jobCard() {
   );
 }
 
-companyCard(var color, [var shadow]) {
+companyCard({
+  var color,
+  var shadow,
+  required var logo,
+  required var name,
+  required var location,
+}) {
   return GestureDetector(
-    onTap: ()=>Get.to(()=>const CompanyDetails()),
+    // onTap: () => Get.to(() => const CompanyDetails()),
     child: Container(
       height: 125.h,
       width: 140.82.w,
@@ -352,8 +565,8 @@ companyCard(var color, [var shadow]) {
               child: SizedBox(
                 height: 43.h,
                 width: 43.w,
-                child: Image.asset(
-                  "assets/985_google_g_icon.jpg",
+                child: Image.network(
+                  logo,
                 ),
               ),
             ),
@@ -363,7 +576,7 @@ companyCard(var color, [var shadow]) {
             SizedBox(
               width: 80.w,
               child: Text(
-                'MicroSoft',
+                name,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
                 style: textStyle(
@@ -389,7 +602,7 @@ companyCard(var color, [var shadow]) {
                 SizedBox(
                   width: 76.w,
                   child: Text(
-                    'Bengaluru, India',
+                    location,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                     style: textStyle(
@@ -408,7 +621,7 @@ companyCard(var color, [var shadow]) {
   );
 }
 
-jobCardList(var card, var direction, {var height,var width}) {
+jobCardList(var card, var direction, {var height, var width}) {
   return ListView.separated(
       scrollDirection: direction,
       itemBuilder: (BuildContext context, index) {
@@ -430,10 +643,12 @@ companyList() {
       scrollDirection: Axis.horizontal,
       itemBuilder: (BuildContext context, index) {
         return companyCard(
-          HexColor(
-            "#E5E4E4",
-          ),
-        );
+            color: HexColor(
+              "#E5E4E4",
+            ),
+            location: "Banglur",
+            name: "Google",
+            logo: "assets/985_google_g_icon.jpg");
       },
       separatorBuilder: (
         BuildContext context,
@@ -455,13 +670,18 @@ jobGrid() {
         mainAxisSpacing: 10.0,
       ),
       itemBuilder: (context, index) {
-        return companyCard(quatesText);
+        return companyCard(
+          color: quatesText,
+          location: "kochi",
+          logo: "assets/985_google_g_icon.jpg",
+          name: "google",
+        );
       });
 }
 
-qualifications() {
+qualifications({required String text}) {
   return Text(
-    "•   In publishing and graphic design, Lorem ipsum is a\n    placeholder textommonly used .",
+    "•   $text,",
     style: textStyle(
       fullBlack,
       14.sp,
@@ -481,6 +701,8 @@ growableSkillCard() {
     children: [
       formField(
         "Skill",
+        false,
+        TextInputType.name,
         width: 130.w,
       ),
       SizedBox(

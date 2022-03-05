@@ -49,6 +49,8 @@ class CreateResume extends StatelessWidget {
                       children: [
                         formField(
                           "First Name",
+                           false,
+                            TextInputType.name,
                        width:    240.0.w,
                          height:  57.0.h,
                         ),
@@ -57,6 +59,8 @@ class CreateResume extends StatelessWidget {
                         ),
                         formField(
                           "Last Name",
+                           false,
+                            TextInputType.name,
                          width:  240.0.w,
                         height:   57.0.h,
                         ),
@@ -65,6 +69,8 @@ class CreateResume extends StatelessWidget {
                         ),
                         formField(
                           "Job Title",
+                           false,
+                            TextInputType.name,
                         width:   240.0.w,
                         height:   57.0.h,
                         ),
@@ -94,6 +100,8 @@ class CreateResume extends StatelessWidget {
                 ),
                 formField(
                   "About you",
+                   false,
+                            TextInputType.name,
                 width:   331.w,
                  height:  110.h,
                 )

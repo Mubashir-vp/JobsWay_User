@@ -100,7 +100,10 @@ class TaskPage extends StatelessWidget {
                     Expanded(
                       child: formField(
                         "Copy Link Here",
+                         false,
+                            TextInputType.name,
                         width: 80.w,
+
                       ),
                     ),
                     SizedBox(
@@ -113,7 +116,7 @@ class TaskPage extends StatelessWidget {
                 ),
                 Center(
                   child: GestureDetector(
-                    onTap: () => Get.to(() => const ApplyingJob()),
+                    // onTap: () => Get.to(() =>  ApplyingJob()),
                     child: Container(
                       alignment: Alignment.center,
                       child: Text(

@@ -68,18 +68,24 @@ class UserDetailsAdd extends StatelessWidget {
                     ),
                     formField(
                       "First Name",
+                       false,
+                            TextInputType.name,
                     ),
                     SizedBox(
                       height: 34.h,
                     ),
                     formField(
                       "Last Name",
+                       false,
+                            TextInputType.name,
                     ),
                     SizedBox(
                       height: 34.h,
                     ),
                     formField(
                       "E-mail",
+                       false,
+                            TextInputType.name,
                     ),
                     SizedBox(
                       height: 34.h,
@@ -89,6 +95,8 @@ class UserDetailsAdd extends StatelessWidget {
                         Expanded(
                           child: formField(
                             "Years.of.Exp",
+                             false,
+                            TextInputType.name,
                           ),
                         ),
                         SizedBox(
@@ -97,6 +105,8 @@ class UserDetailsAdd extends StatelessWidget {
                         Expanded(
                           child: formField(
                             "Portfolio link",
+                             false,
+                            TextInputType.name,
                           ),
                         )
                       ],
@@ -109,6 +119,8 @@ class UserDetailsAdd extends StatelessWidget {
                         Expanded(
                           child: formField(
                             "Phone",
+                             false,
+                            TextInputType.name,
                           ),
                         ),
                         SizedBox(
@@ -117,6 +129,8 @@ class UserDetailsAdd extends StatelessWidget {
                         Expanded(
                           child: formField(
                             "Location",
+                             false,
+                            TextInputType.name,
                           ),
                         )
                       ],
@@ -146,6 +160,8 @@ class UserDetailsAdd extends StatelessWidget {
                       children: [
                         Expanded(
                           child: formField("Facebook",
+                           false,
+                            TextInputType.name,
                               suffix: FaIcon(
                                 FontAwesomeIcons.facebook,
                                 color: primaryGreen,
@@ -157,6 +173,8 @@ class UserDetailsAdd extends StatelessWidget {
                         ),
                         Expanded(
                           child: formField("Linked In",
+                           false,
+                            TextInputType.name,
                               suffix: FaIcon(
                                 FontAwesomeIcons.linkedin,
                                 color: primaryGreen,
@@ -172,6 +190,8 @@ class UserDetailsAdd extends StatelessWidget {
                         Expanded(
                           child: formField(
                             "Twitter",
+                             false,
+                            TextInputType.name,
                             suffix: FaIcon(
                               FontAwesomeIcons.twitter,
                               color: primaryGreen,
@@ -184,6 +204,8 @@ class UserDetailsAdd extends StatelessWidget {
                         Expanded(
                           child: formField(
                             "Instagram",
+                             false,
+                            TextInputType.name,
                             suffix: FaIcon(
                               FontAwesomeIcons.instagram,
                               color: primaryGreen,
